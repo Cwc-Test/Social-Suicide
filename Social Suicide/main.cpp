@@ -18,7 +18,8 @@ gameplay jeu(1);
 int lieux = 1;
 bool candidated = true;
 int countcand = 0;
-
+int counttour = 0;
+bool isLaRue = true;
 /*
  besoins[1] = need_app;
  besoins[2] = need_hyg;
@@ -45,6 +46,13 @@ void choixAct(int lieu){
     }
     if (lieu==1){
         cout << "\nVous êtes en ville.\nQue faire ?" << endl;
+        if (jeu.isSolar()){
+            if (jeu.getTime() < -3){
+                if (jeu.getTime() > -6){
+                    cout << "0 - Parler a l'araignee poilue" << endl;
+                }
+            }
+        }
         cout << "1 - La manche" << endl;
         cout << "2 - Manger un truc" << endl;
         cout << "3 - Parler aux gens" << endl;
@@ -56,11 +64,41 @@ void choixAct(int lieu){
                 cout << "7 - Deposer une candidature" << endl;
             }
         }
+        if (counttour>10){
+            if (isLaRue){
+               cout << "8 - Traverser la rue pour trouver du travail" << endl;
+            }
+        }
         
         int choix;
         cin >> choix;
         bool res;
+        counttour+=1;
         switch (choix) {
+            case 8:
+                if (counttour>10){
+                    if (isLaRue){
+                        if(jeu.traverserLaRue()){
+                            cout << "Vous avez ete retenu pour du travail !" << endl;
+                            
+                            cout << "Quelque temps plus tard vous avez finit votre contrat..." << endl;
+                            float calcmoney = (rand()%1200)+400;
+                            jeu.gagnemoney(calcmoney);
+                            cout << "Vous avez gagner: " << calcmoney << "€ !" << endl;
+                        }
+                        isLaRue = false;
+                    }
+                }
+                break;
+            case 0:
+                if (jeu.isSolar()){
+                    if (jeu.getTime() < -3){
+                        if (jeu.getTime() > -6){
+                            jeu.spyderdealer();
+                        }
+                    }
+                }
+                break;
             case 1:
                 jeu.manche();
                 break;
@@ -122,6 +160,8 @@ void choixAct(int lieu){
                 break;
                 
             default:
+                counttour-=1;
+                if (counttour<0){counttour=0;}
                 break;
         }
     }
@@ -159,7 +199,17 @@ int main(int argc, const char * argv[]) {
      MATRX[12] = intelligence;
      MATRX[13] = guitard;
      */
+    cout << "Social Suicide, Le jeu de Jerry !" << endl << "Enfin c'est rick qui l'a cree car Jerry est trops con pour ca...\n" << endl;
     
+    cout << "Rick Sanchez t’a laisser, toi Jerry Smith dans la rue(dimension inconnue),\navec quelques euros en poche et rien d’autre!" << endl;
+    cout << "Tu dois survivre et te sortir de là, tu est un crétin et Rick a déjà d’eu te remplacer par un clone." << endl <<"Mais tu ne veux pas mourrir et même si tu est con tu va essayer de t’en sortir."<<endl<<endl;
+    
+    cout << "RICK DIT:" << "Tiens voila 5 euro, ici c’est la France donc tu paye pas en dollars." << endl;
+    cout << "On va voir si tu réussit a survivre, peut-être que je te respecterai, sinon c’est pas grave,\nj’ai un plan de secours si tu venait malencontreusement a mourrir." << endl;
+    cout << "T’est tellement stupide que ça ne devrait pas être un problème.\n";
+    cout << "Je suis sur que personne ne verra la différence.\n";
+    cout << "Essaye de trouver un travail, ici personne ne va t ‘héberger a l’oeil.\n";
+    cout << "Par contre essaye de ne pas te faire violer, ça serait con de choper des merdes.\n\n";
     //MAIN LOOP
     while (true){
         //system("clear");
@@ -174,10 +224,14 @@ int main(int argc, const char * argv[]) {
         jeu.afficheTout();
         jeu.timepassndegrad();
         choixAct(lieux);
-        if (jeu.gameisover()){ return 0; }
+        if (jeu.gameisover()){
+            jeu.AffGameOver();
+            return 0;
+        }
         jeu.poopishere();
         jeu.noEnergy();
         jeu.nextStep();
+        jeu.mourirDeCrotteDeNezCacaSida();
     }
     
     return 0;

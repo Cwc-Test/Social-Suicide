@@ -8,12 +8,105 @@
 
 #include "gameplay.hpp"
 
+void gameplay::usePutella(){
+    
+}
+
+bool gameplay::getBAC(){
+    return BAC;
+}
+
+void gameplay::setBAC(){
+    BAC = true;
+}
+
+bool gameplay::getCouteau(){
+    return couteau;
+}
+void gameplay::setCouteau(){
+    couteau = true;
+}
+
+bool gameplay::traverserLaRue(){//Traverser la rue(parodie macron)
+    //- [X]         [X]-Peut se faire écraser(90%)
+    //- [X]         [X]-Peut trouver du travail(10%)
+    if ( (rand()%100) < 90){
+        //ecraser
+        cout << "Vous venez de vous faire ecraser par un bus, vous êtes mort !"<< endl;
+        AffGameOver();
+        exit(0);
+    }
+    else{
+        //trouver du travail
+        cout << "Houra macron avait raison ! Vous êtes embauche !" << endl;
+        return true;
+    }
+    return false;
+}
+
+void gameplay::spyderdealer(){
+    /*
+     []-Une araignée qui vend(5h)
+     []-Un pot de putella(3h)
+     []-Un bouclier pour testicules(3h)
+     [X]-Couteau qui donne l’avantage sur 1 combat (80€) 3h
+    */
+    cout << "0 - Acheter un couteau" << endl;
+    cout << "1 - Acheter un pot de Putella" << endl;
+    cout << "2 - Acheter un B.A.C.(Bouclier à testicules)"<< endl;
+    int choix;
+    cin >> choix;
+    switch (choix) {
+        case 0:
+            if (money>=80.00){
+                money-=80.00;
+                setCouteau();
+            }
+            break;
+            
+        case 1:
+            if (money>=50.99){
+                money-=50.99;
+                usePutella();
+            }
+            break;
+        case 2:
+            if (money>=32.70){
+                money-=32.70;
+                setBAC();
+            }
+            
+        default:
+            break;
+    }
+}
+
+int gameplay::getTime(){
+    return hourCurrent;
+}
+
+void gameplay::Sauvegarder(){//Sauvegarde du jeu(6h)
+    if (PointSave>0){
+        PointSave-=1;
+        
+    }
+}
+void gameplay::addPointSave(int val){//Points de sauvegardes(2h)
+    PointSave+=val;
+}
+void gameplay::Charger(){//Chargement du jeu(8h)
+    
+}
+
+void gameplay::getBACouilles(){
+    bouclierAcouilles = true;
+}
 void gameplay::combat(){
     /*
-     []Mode combat:
+     [X]Mode combat:
      [X]Attaque a mains nue (force)
-     []Dissuasion (Intelligence+++ et Charisme+)
-     []Fuite (Chance++ et Intelligence+)
+     [X]Dissuasion (Intelligence+++ et Charisme+)
+     [X]Fuite (Chance++ et Intelligence+)
      */
     cout << "Vous vous faites attaquer !" << endl;
     float PV = 50;
@@ -182,7 +275,7 @@ void gameplay::noEnergy(){
     if (PTSLIVE.getNeeds()[5]<0.01){
         cout << "Vous êtes fatigue et vous vous endormez !" << endl;
         //Vous vous faites voler
-        float malchance = (rand() % 100) < 30;
+        bool malchance = (rand() % 100) < 30;
         if (malchance){
             money = 0;
             cout << "Vous vous faites voler tout votre argent !" << endl;
@@ -292,7 +385,7 @@ bool gameplay::candidate(){
 }
 
 void gameplay::gratte(){
-    float malchance = (rand() % 100) < 6;
+    bool malchance = (rand() % 100) < 6;
     int x = 0.02;
     if (malchance){
         x += (rand() % 3)/100;
@@ -405,8 +498,20 @@ void gameplay::dormir(){
     }
     else{
         coefmal = 45;
+        //La nuit tu peut te faire violer(1h)
+        bool vviol = (rand() % 100) < 15;
+        if (vviol){
+            cout << "Vous vous faites violer par l'anus !\nVous en avez plein le cul!" << endl;
+            if ( (rand()%100) < 5 ){
+                CrotteDeNezCacaSida = true;
+            }
+            if ( (rand()%100) < 15 ){
+                DiarrheeAnusDilated = true;
+                cout << "Votre anus est eclaté !\n Vous pouvez vous chiez dessus !"<<endl;
+            }
+        }
     }
-    float malchance = (rand() % 100) < coefmal;
+    bool malchance = (rand() % 100) < coefmal;
     if (malchance){
         money = 0;
         cout << "Vous vous faites voler tout votre argent !" << endl;
@@ -427,7 +532,7 @@ void gameplay::dormir(){
 bool gameplay::manger(){
     if (money>=7.00){
         money-=7.00;
-        bool malchance = (rand() % 100) < 15;
+        bool malchance = (rand() % 100) < 17;
         float x = 0.1;
         if (malchance){
             x += (rand() % 30)/100;
@@ -488,7 +593,7 @@ void gameplay::parler(){
 
 void gameplay::manche(){
     if (isDay){
-        float malchance = (rand() % 100) < 6;
+        bool malchance = (rand() % 100) < 6;
         if (malchance){
             cout << "La police vous arrête car la mendicite est interdite !\nDirection le poste de police !" << endl;
             cout << "Vous en sortez au bout de plusieurs heures." << endl;
@@ -498,21 +603,36 @@ void gameplay::manche(){
         }
         else{
             map<int, float> sommeswin;
-            bool chance = (rand() % 100) < 5;
-            float x =  0.50;
-            if (chance){
-                x += (rand() % 10);
-            }
-            bool malchance = (rand() % 100) < 35;
-            bool chanceCompetences = (rand() % 100) < (charisme * 5);
-            
-            if (!malchance){
-                gagneExpCharisme();
-                if (chanceCompetences){
-                    x += (rand() % 30);
+            bool chance;
+            float x;
+            bool malchance;
+            bool chanceCompetences;
+            int idmax = rand()%50;
+            for (int id=0; id<idmax; id++){
+                chance = (rand() % 100) < 16;
+                x = (rand()%100)/ 100;
+                if (chance){
+                    x += (rand() % 10);
                 }
+                malchance = (rand() % 100) < 35;
+                chanceCompetences = (rand() % 100) < (charisme * 5);
+                if (!malchance){
+                    gagneExpCharisme();
+                    if (chanceCompetences){
+                        x += (rand() % 30);
+                    }
+                }
+                sommeswin[id] = x;
+                
             }
-            money+=x;
+            
+            for (int i=0; i<idmax; i++){
+                if (sommeswin[i]==0.00){cout << "Connard dit: Va trouver du travail faigneant"<< endl;}
+                else{
+                    cout << "Vous recevez " << sommeswin[i] << " Euros !" << endl;
+                }
+                money+=sommeswin[i];
+            }
         }
     }
     else{

@@ -6,6 +6,10 @@
 //  Copyright © 2019 Rick Sanchez. All rights reserved.
 //
 /*
+ [X]Points de sauvegardes(2h)
+ []Sauvegarde du jeu(6h)
+ []Chargement du jeu(8h)
+ 
 Integrer un mode jour/nuit
  la journee tout est permis(12 tours)
     [X]La police peut vous interpeller si vous faites la manche(Malchance-)
@@ -17,6 +21,27 @@ Integrer un mode jour/nuit
         [X]Attaque a mains nue (force)
         [X]Dissuasion (Intelligence+++ et Charisme+)
         [X]Fuite (Chance++ et Intelligence+)
+ 
+ 
+ []-Une araignée qui vend(5h)
+ []-Un pot de putella(3h)
+ []-Un bouclier pour testicules(3h)
+ [X]-Intro histoire(2h)
+ []-Couteau qui donne l’avantage sur 1 combat (80€) 3h
+ [X]-La nuit tu peut te faire violer(1h)
+ []-Quêtes(10h):
+    []-Trouver un travail
+    []-Rentrer chez soit
+ 
+ Spéciale (après 10tours une seule fois)
+ [X]-Traverser la rue(parodie macron)
+    [X]-Peut se faire écraser(90%)
+    [X]-Peut trouver du travail(10%)
+
+ []-Simulation passants manche(2h)
+ []-Ecran gameover(1h)
+ 
+ 
 */
 #ifndef gameplay_hpp
 #define gameplay_hpp
@@ -44,9 +69,55 @@ private:
     
     int hourCurrent = 2;
     bool isDay = true;
+    bool bouclierAcouilles = false;
     
+    bool CrotteDeNezCacaSida = false;
+    bool DiarrheeAnusDilated = false;
+    
+    int countSida = 80;
+    
+    int PointSave = 3;
+    
+    bool couteau = false;
+    bool BAC = false;
     
 public:
+    bool getCouteau();
+    void setCouteau();
+    bool getBAC();
+    void setBAC();
+    bool traverserLaRue();//Traverser la rue(parodie macron)
+    
+    void spyderdealer();//Une araignée qui vend(5h)
+    
+    void Sauvegarder();//Sauvegarde du jeu(6h)
+    void addPointSave(int val);//Points de sauvegardes(2h)
+    void Charger();//Chargement du jeu(8h)
+    
+    bool mourirDeCrotteDeNezCacaSida(){
+        if (CrotteDeNezCacaSida){
+            countSida-=1;
+            if (countSida<=0){
+                if ( (rand()%100) < 95){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    
+    void getBACouilles();
+    bool useBACouilles();
+    /*
+     Le putella permet d'augmenter les PV et le Divertissement
+     Il coute 50 credits
+     Il est possible de choper une des plus graves maladies
+     Il désactive le BAC
+     Il est vendu par une arraignée (Mac in teucha)
+     */
+    void usePutella();
+    
     void AffGameOver(){
         cout << endl;
         cout << "┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼" << endl;
@@ -150,6 +221,7 @@ public:
     
     bool isSolar();
     void wtimeisit();
+    int getTime();
     
     void combat();
 
