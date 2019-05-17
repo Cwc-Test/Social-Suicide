@@ -23,23 +23,20 @@ Integrer un mode jour/nuit
         [X]Fuite (Chance++ et Intelligence+)
  
  
- []-Une araignée qui vend(5h)
- []-Un pot de putella(3h)
- []-Un bouclier pour testicules(3h)
+ [X]-Une araignée qui vend(5h)
+ [X]-Un pot de putella(3h)
+ [X]-Un bouclier pour testicules(3h)
  [X]-Intro histoire(2h)
- []-Couteau qui donne l’avantage sur 1 combat (80€) 3h
+ [X]-Couteau qui donne l’avantage sur 1 combat (80€) 3h
  [X]-La nuit tu peut te faire violer(1h)
- []-Quêtes(10h):
-    []-Trouver un travail
-    []-Rentrer chez soit
  
  Spéciale (après 10tours une seule fois)
  [X]-Traverser la rue(parodie macron)
     [X]-Peut se faire écraser(90%)
     [X]-Peut trouver du travail(10%)
 
- []-Simulation passants manche(2h)
- []-Ecran gameover(1h)
+ [X]-Simulation passants manche(2h)
+ [X]-Ecran gameover(1h)
  
  
 */

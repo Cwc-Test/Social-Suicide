@@ -9,7 +9,14 @@
 #include "gameplay.hpp"
 
 void gameplay::usePutella(){
-    
+    cout << "Vous manger du Putella." << endl;
+    if ( (rand()%100) < 2 ){
+        CrotteDeNezCacaSida = true;
+        cout << "Vous vous sentez bizarre." << endl;
+    }
+    PTSLIVE.parler((rand()%60)/100);
+    PTSLIVE.manger(0.4+(rand()%60)/100);
+    PTSLIVE.jouer((rand()%75)/100);
 }
 
 bool gameplay::getBAC(){
@@ -46,13 +53,14 @@ bool gameplay::traverserLaRue(){//Traverser la rue(parodie macron)
 
 void gameplay::spyderdealer(){
     /*
-     []-Une araignée qui vend(5h)
-     []-Un pot de putella(3h)
-     []-Un bouclier pour testicules(3h)
+     [X]-Une araignée qui vend(5h)
+     [X]-Un pot de putella(3h)
+     [X]-Un bouclier pour testicules(3h)
      [X]-Couteau qui donne l’avantage sur 1 combat (80€) 3h
     */
+    cout << "Araignee commerciale dit: Hey mec regarde ce que j'ai !" << endl;
     cout << "0 - Acheter un couteau" << endl;
-    cout << "1 - Acheter un pot de Putella" << endl;
+    cout << "1 - Acheter un pot de Putella(usage immediat)" << endl;
     cout << "2 - Acheter un B.A.C.(Bouclier à testicules)"<< endl;
     int choix;
     cin >> choix;
@@ -107,22 +115,47 @@ void gameplay::combat(){
      [X]Attaque a mains nue (force)
      [X]Dissuasion (Intelligence+++ et Charisme+)
      [X]Fuite (Chance++ et Intelligence+)
+     []-L'ennemi vous attaque
      */
     cout << "Vous vous faites attaquer !" << endl;
     float PV = 50;
     float PVopp = rand()%50;
     float FORCEopp = rand()%10;
     int choix;
-    int chance, x;
+    int chance, x, malchance;
     bool breakerfast = true;
     while (breakerfast){
         cout << "Tu a " << PV << " PV" << endl;
         cout << "Il a " << PVopp << " PV" << endl;
+        if (getCouteau()){
+            cout << "0 - Planter ce trou du cul" << endl;
+        }
         cout << "1 - Attaquer a mains nues" << endl;
         cout << "2 - Dissuasion" << endl;
         cout << "3 - Fuite" << endl;
         cin >> choix;
         switch (choix) {
+            case 0:
+                if (getCouteau()){
+                    couteau = false;
+                    chance = (rand()%100) < 88;
+                    if (chance){
+                        if ( ( (force * 5) / (FORCEopp * 5) ) > 0 ) {
+                            PVopp = 0;
+                            cout << "Vous avez tuer l'attaquant !" << endl;
+                        }
+                        else{
+                            x = 10 + rand()%45;
+                            cout << "Le connard perd "<<x<<" PV !" << endl;
+                            PVopp -= x;
+                        }
+                        
+                    }
+                    else{
+                        cout << "Echec du coup !" << endl;
+                    }
+                }
+                break;
             case 1: //Attaque a mains nue (force)
                 chance = (rand() % 100) < 80;
                 if (chance){
@@ -172,14 +205,6 @@ void gameplay::combat(){
             default:
                 break;
         }
-        //GAMEOVER
-        if (PV <= 0){
-            cout << "Vous êtes mort !" << endl;
-            //ASCII GO
-            AffGameOver();
-            exit(0);
-        }
-        
         //WIN
         if (PVopp <= 0){
             x = rand()%10;
@@ -188,6 +213,33 @@ void gameplay::combat(){
             money+=x;
             cout << "Vous lui volez " << x << " Euros !" << endl;
         }
+        
+        //[X]-L'ennemi vous attaque (10min)
+        malchance = (rand()%100) < 15;
+        if (!malchance){
+            cout << "L'ennemi vous frappe ! " << endl;
+            if (getBAC()){
+                cout << "Votre BAC vous protège pour ce tour !" << endl;
+                bouclierAcouilles = false;
+            }
+            else{
+                PV-=(rand()%30)+2;
+            }
+        }
+        else{
+            cout << "L'ennemi rate son coup ! " << endl;
+        }
+        
+        
+        //GAMEOVER
+        if (PV <= 0){
+            cout << "Vous êtes mort !" << endl;
+            //ASCII GO
+            AffGameOver();
+            exit(0);
+        }
+        
+
         
     }
     

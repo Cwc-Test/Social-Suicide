@@ -10,6 +10,8 @@
 		1D0E87862276111900DD5449 /* need.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D0E87842276111900DD5449 /* need.cpp */; };
 		1D0E878922764BDE00DD5449 /* gameplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D0E878722764BDE00DD5449 /* gameplay.cpp */; };
 		1D862AE12275E6F6001CC17F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D862AE02275E6F6001CC17F /* main.cpp */; };
+		1DC0AC75228EE09A00EDDDC8 /* base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DC0AC72228EE09A00EDDDC8 /* base64.cpp */; };
+		1DC0AC76228EE09A00EDDDC8 /* sha512.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DC0AC73228EE09A00EDDDC8 /* sha512.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,14 @@
 		1D680D40227F503200A4CB2E /* goals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = goals.json; sourceTree = "<group>"; };
 		1D862ADD2275E6F6001CC17F /* Social Suicide */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Social Suicide"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D862AE02275E6F6001CC17F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1DC0AC6E228EE09A00EDDDC8 /* Shred.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shred.h; sourceTree = "<group>"; };
+		1DC0AC6F228EE09A00EDDDC8 /* sha512.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha512.h; sourceTree = "<group>"; };
+		1DC0AC70228EE09A00EDDDC8 /* csi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csi.h; sourceTree = "<group>"; };
+		1DC0AC71228EE09A00EDDDC8 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
+		1DC0AC72228EE09A00EDDDC8 /* base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = base64.cpp; sourceTree = "<group>"; };
+		1DC0AC73228EE09A00EDDDC8 /* sha512.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha512.cpp; sourceTree = "<group>"; };
+		1DC0AC74228EE09A00EDDDC8 /* like.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = like.h; sourceTree = "<group>"; };
+		1DC0AC77228EE59600EDDDC8 /* secured.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = secured.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +76,13 @@
 		1D862ADF2275E6F6001CC17F /* Social Suicide */ = {
 			isa = PBXGroup;
 			children = (
+				1DC0AC72228EE09A00EDDDC8 /* base64.cpp */,
+				1DC0AC71228EE09A00EDDDC8 /* base64.h */,
+				1DC0AC70228EE09A00EDDDC8 /* csi.h */,
+				1DC0AC74228EE09A00EDDDC8 /* like.h */,
+				1DC0AC73228EE09A00EDDDC8 /* sha512.cpp */,
+				1DC0AC6F228EE09A00EDDDC8 /* sha512.h */,
+				1DC0AC6E228EE09A00EDDDC8 /* Shred.h */,
 				1D862AE02275E6F6001CC17F /* main.cpp */,
 				1D0E87842276111900DD5449 /* need.cpp */,
 				1D0E87852276111900DD5449 /* need.hpp */,
@@ -74,6 +91,7 @@
 				1D16878C227B392100BEC5E4 /* text.h */,
 				1D680D3F227F4FD100A4CB2E /* goals.h */,
 				1D680D40227F503200A4CB2E /* goals.json */,
+				1DC0AC77228EE59600EDDDC8 /* secured.h */,
 			);
 			path = "Social Suicide";
 			sourceTree = "<group>";
@@ -134,6 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DC0AC75228EE09A00EDDDC8 /* base64.cpp in Sources */,
+				1DC0AC76228EE09A00EDDDC8 /* sha512.cpp in Sources */,
 				1D862AE12275E6F6001CC17F /* main.cpp in Sources */,
 				1D0E87862276111900DD5449 /* need.cpp in Sources */,
 				1D0E878922764BDE00DD5449 /* gameplay.cpp in Sources */,
