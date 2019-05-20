@@ -9,8 +9,8 @@
 //  Aller n'oubliez pas que celui qui fabrique le verre n'est pas responsable de ce que l'on met dedans...
 //
 
-#ifndef Header_h
-#define Header_h
+#ifndef CSI_h
+#define CSI_h
 #include <map>
 #include <sstream>
 #include <string>

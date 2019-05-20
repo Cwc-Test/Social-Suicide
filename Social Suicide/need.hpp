@@ -24,6 +24,14 @@ private:
     float need_soc = 0.50;
     
 public:
+    void setNeed(float app, float hyg, float vess, float fun, float sleep, float soc){
+        need_app = app;
+        need_hyg = hyg;
+        need_vess = vess;
+        need_fun = fun;
+        need_sleep = sleep;
+        need_soc = soc;
+    }
     void affichage();
     void manger(float val);
     void laver(float val);

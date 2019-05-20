@@ -69,12 +69,24 @@ void choixAct(int lieu){
                cout << "8 - Traverser la rue pour trouver du travail" << endl;
             }
         }
+        if (jeu.getMoney()>100){
+            cout << "9 - Prendre le bus pour chopper l'avion vers les USA(Rentrer chez vous)" << endl;
+        }
+        if (jeu.getPS()>0){
+            cout << "10 - Sauvegarder" << endl;
+        }
         
         int choix;
         cin >> choix;
+        cout << endl << endl;
         bool res;
         counttour+=1;
         switch (choix) {
+            case 10:
+                if (jeu.getPS()>0){
+                    jeu.Sauvegarder();
+                }
+                break;
             case 8:
                 if (counttour>10){
                     if (isLaRue){
@@ -105,7 +117,7 @@ void choixAct(int lieu){
             case 2:
                 res = jeu.manger();//7.00
                 if (!res){
-                    cout << "Le cinemas coute 7.00€, t'a pas les tunes mec !" << endl;
+                    cout << "La bouffe coute 7.00€, t'a pas les tunes mec !" << endl;
                 }
                 break;
             case 3:
@@ -159,6 +171,15 @@ void choixAct(int lieu){
                 }
                 break;
                 
+            case 9:
+                if (jeu.getMoney()>100){
+                    bool resultfinal = jeu.busUSA();
+                    if (resultfinal){
+                        jeu.youWon();
+                    }
+                }
+                break;
+                
             default:
                 counttour-=1;
                 if (counttour<0){counttour=0;}
@@ -169,6 +190,15 @@ void choixAct(int lieu){
 
 
 int main(int argc, const char * argv[]) {
+    cout << "Charger la sauvegarde ? (O)ui/(N)on" << endl;
+    string chrg;
+    cin >> chrg;
+    bool crx = false;
+    if (chrg=="O"){
+        crx = jeu.Charger();
+    }
+    
+    
     cout << "Veuillez mettre le terminal en plein écran." << endl;
     while (true){
         //Structure dans laquelle sera mit les informations du terminal

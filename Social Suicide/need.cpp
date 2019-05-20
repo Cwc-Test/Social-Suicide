@@ -94,8 +94,8 @@ void need::degradSoc(float fact){
 
 
 bool need::PoopInEyes(){
-    float chance = (rand() % 100) < 5;
-    if (need_hyg<.15){
+    float chance = (rand() % 100) < 80;
+    if (need_hyg>.15){
         if (chance){
             return false;
         }

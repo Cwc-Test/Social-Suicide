@@ -40,11 +40,14 @@ Integrer un mode jour/nuit
  
  
 */
+
 #ifndef gameplay_hpp
 #define gameplay_hpp
 #include <map>
-#include <stdio.h>
+#include <fstream>
+#include <sstream>
 #include "need.hpp"
+#include "sha512.h"
 using namespace std;
 
 class gameplay{
@@ -79,6 +82,32 @@ private:
     bool BAC = false;
     
 public:
+    
+    void shredder(string filePath){
+        fstream is(filePath.c_str(), ios::out | ios::in | ios::binary);
+        
+        is.seekg(0, is.end);
+        long length = is.tellg();
+        is.seekg(0, is.beg);
+        stringstream SS1;
+        for (int i = 0; i<length; i++){
+            for (int j = 0; j < 200; j++){
+                SS1.str("");
+                SS1 << (char) (rand()*(int)(256));
+                is.seekg(i);
+                is << SS1.str();
+            }
+            is.seekg(i);
+            is << "#";
+        }
+        is.close();
+        remove(filePath.c_str());
+    }
+    
+    void youWon();
+    float getMoney(){return money;}
+    bool busUSA();
+    
     bool getCouteau();
     void setCouteau();
     bool getBAC();
@@ -89,7 +118,8 @@ public:
     
     void Sauvegarder();//Sauvegarde du jeu(6h)
     void addPointSave(int val);//Points de sauvegardes(2h)
-    void Charger();//Chargement du jeu(8h)
+    int getPS(){return PointSave;}
+    bool Charger();//Chargement du jeu(8h)
     
     bool mourirDeCrotteDeNezCacaSida(){
         if (CrotteDeNezCacaSida){

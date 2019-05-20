@@ -8,6 +8,40 @@
 
 #include "gameplay.hpp"
 
+void gameplay::youWon(){
+    cout << "FELICITATION VOUS AVEZ FINIT LE JEU !!! " << endl << endl;
+    cout << " __ __ _____ _____ " << endl;
+    cout << "|  |  |     |  |  |" << endl;
+    cout << "|_   _|  |  |  |  |" << endl;
+    cout << "  |_| |_____|_____|" << endl;
+    cout << "                   " << endl;
+    cout << " _ _ _ _____ _____ " << endl;
+    cout << "| | | |     |   | |" << endl;
+    cout << "| | | |  |  | | | |" << endl;
+    cout << "|_____|_____|_|___|" << endl;
+    cout << endl << "Jerry est rentrer chez lui, ni Beth ni personne avait remarquer son absence..." << endl;
+}
+
+
+
+bool gameplay::busUSA(){
+    if (money>=1000){
+        money-=1000;
+        if ((rand()%100)<2){
+            cout << "Vous avez rater votre bus pour l'aéroport !\nVous retournez en Ville!" << endl;
+            return false;
+        }
+        else {
+            cout << "Bravo ! Vous avez réussit a rentrer chez vous ! Rick va faire la gueule en vous voyant !" << endl;
+            return true;
+        }
+    }
+    else {
+        cout << "Vous n'avez pas assez de fric ! Le billet coute 1OOO€ !" << endl;
+    }
+    return false;
+}
+
 void gameplay::usePutella(){
     cout << "Vous manger du Putella." << endl;
     if ( (rand()%100) < 2 ){
@@ -96,14 +130,141 @@ int gameplay::getTime(){
 void gameplay::Sauvegarder(){//Sauvegarde du jeu(6h)
     if (PointSave>0){
         PointSave-=1;
-        
+        ofstream mf ("sauvegarde.SS");
+        if (mf.is_open())
+        {
+            
+            //cout << CV << endl << LM << endl << money << endl<< charisme << endl << force << endl << intelligence << endl << guitard << endl<< hourCurrent << endl << isDay << endl << bouclierAcouilles << endl<< CrotteDeNezCacaSida << endl << DiarrheeAnusDilated << endl<< countSida << endl << PointSave << endl << couteau << endl << BAC << endl;
+            
+            
+            
+            mf << CV << endl << LM << endl << money << endl;
+            mf << charisme << endl << force << endl << intelligence << endl << guitard << endl;
+            mf << hourCurrent << endl << isDay << endl << bouclierAcouilles << endl;
+            mf << CrotteDeNezCacaSida << endl << DiarrheeAnusDilated << endl;
+            mf << countSida << endl << PointSave << endl << couteau << endl << BAC << endl;
+            map<int, float> ND = PTSLIVE.getNeeds();
+            for (auto i=ND.begin(); i!=ND.end(); ++i){
+                mf << i->second << endl;
+            }
+            
+            mf.close();
+            
+            cout << "Jeu sauvegarder !" << endl;
+            
+            //encodesave("sauvegarde.SS", "Jerry est un parasite");
+            
+        }
+        else cout << "Impossible de sauvegarder car il y a eu une erreur !"<<endl;
     }
 }
 void gameplay::addPointSave(int val){//Points de sauvegardes(2h)
     PointSave+=val;
 }
-void gameplay::Charger(){//Chargement du jeu(8h)
-    
+bool gameplay::Charger(){//Chargement du jeu(8h)
+    //decodesave("sauvegarde.SS.CSI", "Jerry est un parasite");
+    string line;
+    ifstream myfile ("sauvegarde.SS");
+    if (myfile.is_open())
+    {
+        int i = 0;
+        map<int, string> SIS;
+        while ( getline (myfile,line) )
+        {
+            SIS[i] = line;
+            //cout << i << " --- " << line << endl;
+            i++;
+        }
+        myfile.close();
+        
+        stringstream SS;
+        
+        SS << SIS[0];
+        SS >> CV;
+        SS.str("");
+        SS << SIS[1];
+        SS >> LM;
+        SS.str("");
+        SS << SIS[2];
+        money=stof(SIS[2]);
+        SS.str("");
+        SS << SIS[3];
+        charisme=stof(SIS[3]);
+        SS.str("");
+        SS << SIS[4];
+        force=stof(SIS[4]);
+        SS.str("");
+        SS << SIS[5];
+        intelligence=stof(SIS[5]);
+        SS.str("");
+        SS << SIS[6];
+        guitard=stof(SIS[6]);
+        SS.str("");
+        SS << SIS[7];
+        SS>>hourCurrent;
+        SS.str("");
+        SS << SIS[8];
+        SS>>isDay;
+        SS.str("");
+        SS << SIS[9];
+        SS>>bouclierAcouilles;
+        SS.str("");
+        SS << SIS[10];
+        SS >> CrotteDeNezCacaSida;
+        SS.str("");
+        SS << SIS[11];
+        SS >> DiarrheeAnusDilated;
+        SS.str("");
+        SS << SIS[12];
+        SS >> countSida;
+        SS.str("");
+        SS << SIS[13];
+        SS >> PointSave;
+        SS.str("");
+        SS << SIS[14];
+        SS >> couteau;
+        SS.str("");
+        SS << SIS[15];
+        SS >> BAC;
+        SS.str("");
+        float app, hyg, vess, fun, sleep, soc;
+        SS << SIS[16];
+        app=stof(SIS[16]);
+        SS.str("");
+        SS << SIS[17];
+        hyg=stof(SIS[17]);
+        SS.str("");
+        SS << SIS[18];
+        vess=stof(SIS[18]);
+        SS.str("");
+        SS << SIS[19];
+        fun=stof(SIS[19]);
+        SS.str("");
+        SS << SIS[20];
+        sleep=stof(SIS[20]);
+        SS.str("");
+        SS << SIS[21];
+        soc=stof(SIS[21]);
+        SS.str("");
+        PTSLIVE.setNeed(app, hyg, vess, fun, sleep, soc);
+        
+        /*
+        SS1 << CV << endl << LM << endl << money << endl<< charisme << endl << force << endl << intelligence << endl << guitard << endl<< hourCurrent << endl << isDay << endl << bouclierAcouilles << endl<< CrotteDeNezCacaSida << endl << DiarrheeAnusDilated << endl<< countSida << endl << PointSave << endl << couteau << endl << BAC << endl;
+        SS1 <<app<< hyg<< vess<< fun<< sleep<< soc;
+        SS1 << "Jerry le nul";
+        cout <<endl<<">>>"<< line << endl <<"---"<<endl<< sha512(SS1.str().c_str())<<endl;
+        if (line != sha512(SS1.str().c_str())){
+            //shredder("sauvegarde.SS");
+            exit(-1);
+        }
+        else{*/
+        cout << "Partie chargee !" << endl;
+        //}
+        return true;
+        
+    }
+    else {cout << "Impossible de charger car il y a eu une erreur !"<<endl;}
+    return false;
 }
 
 void gameplay::getBACouilles(){
@@ -675,9 +836,7 @@ void gameplay::manche(){
                     }
                 }
                 sommeswin[id] = x;
-                
             }
-            
             for (int i=0; i<idmax; i++){
                 if (sommeswin[i]==0.00){cout << "Connard dit: Va trouver du travail faigneant"<< endl;}
                 else{
