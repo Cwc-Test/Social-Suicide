@@ -26,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1D0CF7E9229741B300665BE7 /* idiotpass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = idiotpass.h; sourceTree = "<group>"; };
+		1D0CF80B22A1E85600665BE7 /* gloobar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gloobar.h; sourceTree = "<group>"; };
 		1D0E87842276111900DD5449 /* need.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = need.cpp; sourceTree = "<group>"; };
 		1D0E87852276111900DD5449 /* need.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = need.hpp; sourceTree = "<group>"; };
 		1D0E878722764BDE00DD5449 /* gameplay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameplay.cpp; sourceTree = "<group>"; };
@@ -81,6 +83,8 @@
 				1D680D3F227F4FD100A4CB2E /* goals.h */,
 				1D680D40227F503200A4CB2E /* goals.json */,
 				1DC0AC77228EE59600EDDDC8 /* secured.h */,
+				1D0CF7E9229741B300665BE7 /* idiotpass.h */,
+				1D0CF80B22A1E85600665BE7 /* gloobar.h */,
 			);
 			path = "Social Suicide";
 			sourceTree = "<group>";

@@ -11,6 +11,7 @@
 #include "gameplay.hpp"
 #include <stdio.h>
 #include <sys/ioctl.h>
+#include "gloobar.h"
 using namespace std;
 
 gameplay jeu(1);
@@ -35,6 +36,7 @@ bool isLaRue = true;
  MATRX[12] = intelligence;
  MATRX[13] = guitard;
  */
+bar BAR;
 void choixAct(int lieu){
     bool funisnee = jeu.funNeeded(0.15);
     
@@ -43,6 +45,36 @@ void choixAct(int lieu){
     if (countcand <= 0) {
         candidated = true;
         countcand = 0;
+    }
+    if (lieu==2){
+        if (jeu.oldipass1){
+            cout << "2 - Jouer a IdiotPass" << endl;
+        }
+        int choix;
+        cin >> choix;
+        cout << endl << endl;
+        switch (choix) {
+            case 2:
+                if (jeu.oldipass1){
+                    if (jeu.getMoney()>=2.00){
+                        cout << "Tu met deux euros dans la machine."<< endl;
+                        bool result = BAR.machina();
+                        if (result){//winner code
+                            cout << "Vous debloquez la competence: logique" << endl;
+                            jeu.logiquestate = true;
+                            
+                            cout << "Vous pouvez maintenant sortir de la ville, allez explorer !" << endl;
+                            jeu.freeville = true;
+                            
+                            jeu.oldipass1 = false;
+                        }
+                    }
+                    else{
+                        cout << "T'est vraiment un clodo, ta meme pas 2 euros..." << endl << "Tu ne peut pas jouer." << endl;
+                    }
+                }
+                break;
+        }
     }
     if (lieu==1){
         cout << "\nVous êtes en ville.\nQue faire ?" << endl;
@@ -75,6 +107,7 @@ void choixAct(int lieu){
         if (jeu.getPS()>0){
             cout << "10 - Sauvegarder" << endl;
         }
+        cout << "11 - Allez dans les toilettes publiques" << endl;
         
         int choix;
         cin >> choix;
@@ -82,6 +115,10 @@ void choixAct(int lieu){
         bool res;
         counttour+=1;
         switch (choix) {
+            case 11:
+                jeu.wc();
+                jeu.nextStep();
+                break;
             case 10:
                 if (jeu.getPS()>0){
                     jeu.Sauvegarder();

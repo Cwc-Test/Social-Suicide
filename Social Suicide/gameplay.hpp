@@ -38,6 +38,9 @@ Integrer un mode jour/nuit
  [X]-Simulation passants manche(2h)
  [X]-Ecran gameover(1h)
  
+ []-3 Lieux
+ []-1 club prive
+ 
  
 */
 
@@ -48,6 +51,8 @@ Integrer un mode jour/nuit
 #include <sstream>
 #include "need.hpp"
 #include "sha512.h"
+
+
 using namespace std;
 
 class gameplay{
@@ -81,8 +86,15 @@ private:
     bool couteau = false;
     bool BAC = false;
     
-public:
     
+    int logique = 1;
+    
+
+    
+public:
+    bool oldipass1 = true;
+    bool logiquestate = false;
+    bool freeville = false;
     void shredder(string filePath){
         fstream is(filePath.c_str(), ios::out | ios::in | ios::binary);
         
@@ -253,4 +265,6 @@ public:
     void combat();
 
 };
+
+
 #endif /* gameplay_hpp */
