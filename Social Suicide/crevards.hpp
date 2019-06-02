@@ -54,4 +54,38 @@ public:
 
 };
 
+
+class foyerclodo{
+private:
+    int placesmax = 100;
+    int occuped = 0;
+    
+public:
+    void initplaces(){occuped=0;}
+    void nextplacebyclodo(){
+        occuped += rand()%13;
+    }
+    bool isgood(int heure){
+        if ((-7 > heure)&&(heure > -11)){
+            cout << "Le centre est ouvert... vous entrez..." << endl;
+            bool malchance = (rand()%100)<1;
+            if (!malchance){
+                cout << "Vous attendez a l'acceuil..." << endl;
+                if (occuped<placesmax){
+                    cout << "Vous avez trouver une place, vous êtes au chaud !" << endl;
+                    return true;
+                }
+            }
+            else{
+                cout << "Il y a trops de monde, vous ne trouverez pas de place, il vaut mieux partir..." << endl;
+            }
+        }
+        else{
+            cout << "Le centre est fermer, revenez plus tard." << endl;
+        }
+        return false;
+    }
+    
+};
+
 #endif /* crevards_hpp */

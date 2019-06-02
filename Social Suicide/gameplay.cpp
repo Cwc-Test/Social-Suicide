@@ -12,9 +12,22 @@
 int gameplay::aller(){
     while (true){
         int choix;
-        cout << "Aller ou ? ..: ";
+        cout << "Aller ou ? "<<"En ville(1) ?\nDans un bar(2) ?\n"<<endl;
+        if (freeville){
+            cout << "Foyer de sans-abris(3) ?" << endl;
+            cout << "Bibliothèque (4) ?"<<endl;
+        }
         cin >> choix;
         switch (choix) {
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                if (freeville){
+                    return choix;
+                }
+                break;
             case 1:
             case 2:
                 return choix;
@@ -446,17 +459,20 @@ void gameplay::wtimeisit(){
 
 void gameplay::nextStep(){
     if (isDay){
+        clodocenter.initplaces();
         hourCurrent  = ( hourCurrent + 1) % 13;
         if (hourCurrent==0){
             isDay = not isDay;
         }
     }
     if (!isDay){
+        clodocenter.nextplacebyclodo();
         hourCurrent  = ( hourCurrent - 1) % -13;
         if (hourCurrent==0){
             isDay = not isDay;
         }
     }
+    
 }
 
 void gameplay::gagneExpCharisme(){

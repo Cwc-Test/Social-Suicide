@@ -56,8 +56,11 @@ Integrer un mode jour/nuit
 using namespace std;
 
 class gameplay{
-private:
+public:
+    foyerclodo clodocenter;
     need PTSLIVE;
+private:
+    
     crevard Trouduc;
     
     //SAC
@@ -92,6 +95,7 @@ private:
     
     
 public:
+    int gethourCurrent(){return hourCurrent;}
     void simuCrevard(int lieu, int choix){
         int prc = Trouduc.abordage(lieu, choix, money);
         if (prc>0){

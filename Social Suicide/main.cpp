@@ -50,6 +50,42 @@ void choixAct(int lieu){
         candidated = true;
         countcand = 0;
     }
+    if (lieu==3){
+        if (jeu.clodocenter.isgood(jeu.gethourCurrent())){
+            //Menu centre clodo
+            
+            for (int i=0; i<rand()%3; i++){
+                cout << "Vous êtes au foyer des clauchards ! Que faire ?" << endl;
+                cout << "(1) Dormir" << endl << "(2) Manger"<<endl<<"(3) Se laver"<<endl;
+                cin >> choix;
+                switch (choix) {
+                    case 1:
+                        jeu.PTSLIVE.dormir((rand()%140)/100);
+                        break;
+                    case 2:
+                        jeu.PTSLIVE.manger(.4);
+                        break;
+                    case 3:
+                        jeu.PTSLIVE.laver((rand()%140)/100);
+                        i=3;
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+            for (int i=0; i<9; i++){
+                jeu.nextStep();
+            }
+            cout << "Vous sortez du centre..." << endl;
+            lieux = 1;
+        }
+        else{
+            jeu.nextStep();
+            cout << "Vous retournez en ville..." << endl;
+            lieux = 1;
+        }
+    }
     if (lieu==2){
         if (firstbar){
             firstbar = false;
@@ -67,7 +103,7 @@ void choixAct(int lieu){
         cout << endl << endl;
         switch (choix) {
             case 4:
-                lieu = jeu.aller();
+                lieux = jeu.aller();
                 break;
             case 3:
                 jeu.jouer();
@@ -171,7 +207,7 @@ void choixAct(int lieu){
         counttour+=1;
         switch (choix) {
             case 12:
-                lieu = jeu.aller();
+                lieux = jeu.aller();
                 break;
             case 11:
                 jeu.wc();
@@ -356,10 +392,12 @@ int main(int argc, const char * argv[]) {
             return 0;
         }
         jeu.poopishere();
+        jeu.simuCrevard(memlieu,memchoix);
         jeu.noEnergy();
         jeu.nextStep();
         jeu.mourirDeCrotteDeNezCacaSida();
         jeu.zerocharisme();
+        
         if (jeu.maladroitesse()){
             int malchance = (rand()%100) < 80;
             if (malchance){
@@ -369,6 +407,6 @@ int main(int argc, const char * argv[]) {
         }
 
     }
-    jeu.simuCrevard(memlieu,memchoix);
+    
     return 0;
 }
