@@ -51,13 +51,14 @@ Integrer un mode jour/nuit
 #include <sstream>
 #include "need.hpp"
 #include "sha512.h"
-
+#include "crevards.hpp"
 
 using namespace std;
 
 class gameplay{
 private:
     need PTSLIVE;
+    crevard Trouduc;
     
     //SAC
     int CV;
@@ -89,10 +90,53 @@ private:
     
     int logique = 1;
     
-
     
 public:
+    void simuCrevard(int lieu, int choix){
+        int prc = Trouduc.abordage(lieu, choix, money);
+        if (prc>0){
+            perdreArgent(prc);
+        }
+    }
+    void perdreArgent(float prcnt){
+        money = money - (money*(prcnt/100.0));
+    }
+    void vomir();
+    
+    int zerocar = 0;
+    int memcar = 0;
+    void zerocharisme(){
+        if (zerocar<=0){
+            if (charisme>memcar){
+                memcar = charisme;
+            }
+            if (memcar>charisme){
+                charisme=memcar;
+            }
+        }
+        else{
+            zerocar -= 1;
+            charisme = 0;
+        }
+    }
+    bool maladroitesse(){
+        if (maladroit>0){
+            maladroit -= 1;
+            return true;
+        }
+        return false;
+    }
+    int maladroit = 0;
+    int tempcourage = 0;
+    bool couragous(){
+        if (tempcourage>0){
+            tempcourage -= 1;
+            return true;
+        }
+        return false;
+    }
     bool oldipass1 = true;
+    
     bool logiquestate = false;
     bool freeville = false;
     void shredder(string filePath){
@@ -264,6 +308,7 @@ public:
     
     void combat();
 
+    int aller();
 };
 
 

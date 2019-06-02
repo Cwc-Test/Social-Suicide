@@ -11,9 +11,18 @@
 #include "idiotpass.h"
 class bar{
 private:
+    int resistancebeer = 9;
+    int beercount = 0;
     
     
 public:
+    bool getComa(){
+        return beercount>=10;
+    }
+    void oneMoreBeer(){
+        beercount++;
+    }
+    int getBeer(){return beercount;}
     bool machina(){
         idiotbarmachine IBM(6);
         return IBM.playLoop();

@@ -9,11 +9,20 @@
 #ifndef idiotpass_h
 #define idiotpass_h
 #include <math.h>
-
 using namespace std;
 
 class idiotbarmachine{
 private:
+    float getSW(float x){
+        return tan(0.98) - sin(x/0.344)-log(sin(cos(x))+sqrt(-0.63));
+    }
+    float maxi(float a, float b){
+        if (a>b){return a;}
+        return b;
+    }
+    float NonNullPass(float x){
+        return hypot((x/x), maxi(0.377,x));
+    }
     float enigme1(float x0, float x1){
         return trunc(floor(cos(0.114)+x1 - x0));
     }

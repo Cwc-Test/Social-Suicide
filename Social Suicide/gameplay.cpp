@@ -8,6 +8,30 @@
 
 #include "gameplay.hpp"
 
+
+int gameplay::aller(){
+    while (true){
+        int choix;
+        cout << "Aller ou ? ..: ";
+        cin >> choix;
+        switch (choix) {
+            case 1:
+            case 2:
+                return choix;
+                break;
+                
+            default:
+                break;
+        }
+    }
+    return 1;
+}
+
+
+void gameplay::vomir(){
+    PTSLIVE.degradHyg(0.7);
+}
+
 void gameplay::youWon(){
     cout << "FELICITATION VOUS AVEZ FINIT LE JEU !!! " << endl << endl;
     cout << " __ __ _____ _____ " << endl;
@@ -335,6 +359,9 @@ void gameplay::combat(){
                 break;
             case 2: //Dissuasion (Intelligence+++ et Charisme+)
                 chance = (rand()%100) < 500 / 100 * ((1+intelligence)*0.3);
+                if (couragous()){
+                    chance = true;
+                }
                 if (chance){
                     if ((rand()%100) < 500 / 100 * ((1+charisme)*0.1)){
                         cout << "L'ennemi viens de fuir !" << endl;

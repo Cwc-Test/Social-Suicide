@@ -36,8 +36,12 @@ bool isLaRue = true;
  MATRX[12] = intelligence;
  MATRX[13] = guitard;
  */
+int memchoix = 0;
+int memlieu = 0;
 bar BAR;
+bool firstbar = true;
 void choixAct(int lieu){
+    int choix = 0;
     bool funisnee = jeu.funNeeded(0.15);
     
     bool socisnee = jeu.socNeeded(0.10);
@@ -47,13 +51,64 @@ void choixAct(int lieu){
         countcand = 0;
     }
     if (lieu==2){
+        if (firstbar){
+            firstbar = false;
+            cout << "Braman: Hey mec j'te serre a boire ?"<<endl<<"Barman: Tu peux aussi jouer a la machine mais j'te préviens c'est pas pour les abrutits !" << endl;
+        }
+        cout << "0 - Aller pisser"<<endl;
+        cout << "1 - Boire un verre"<<endl;
         if (jeu.oldipass1){
             cout << "2 - Jouer a IdiotPass" << endl;
         }
-        int choix;
+        cout << "3 - Ecouter de la musique"<<endl;
+        cout << "4 - Aller autre part..." <<endl;
+        
         cin >> choix;
         cout << endl << endl;
         switch (choix) {
+            case 4:
+                lieu = jeu.aller();
+                break;
+            case 3:
+                jeu.jouer();
+                break;
+            case 0:
+                jeu.wc();
+                break;
+            case 1:
+                if (jeu.getMoney()>=7.00){
+                    cout << "Tu donne 7 euros au barman et il te sert un verre."<< endl;
+                    cout << "Tu le boie..." << endl;
+                    BAR.oneMoreBeer();
+                    int eff = BAR.getBeer();
+                    switch (eff) {
+                        case 1:
+                            jeu.tempcourage = 6;
+                            break;
+                        case 2:
+                        case 3:
+                            jeu.maladroit = 4;
+                            break;
+                        case 6:
+                        case 7:
+                            jeu.zerocar = 6;
+                            break;
+                        case 9:
+                            jeu.vomir();
+                            break;
+                        default:
+                            break;
+                    }
+                    if(BAR.getComa()){
+                        cout << "Tu est tomber dans le coma et tu est cliniquement mort..."<< endl;
+                        jeu.AffGameOver();
+                        exit(0);
+                    }
+                }
+                else{
+                    cout << "T'en a pas marre d'etre pauvre? Bordel ta meme pas 7 euros..." << endl << "Tu ne peut pas boire tant pis.." << endl;
+                }
+                break;
             case 2:
                 if (jeu.oldipass1){
                     if (jeu.getMoney()>=2.00){
@@ -108,13 +163,16 @@ void choixAct(int lieu){
             cout << "10 - Sauvegarder" << endl;
         }
         cout << "11 - Allez dans les toilettes publiques" << endl;
+        cout << "12 - Allez autre part..."<< endl;
         
-        int choix;
         cin >> choix;
         cout << endl << endl;
         bool res;
         counttour+=1;
         switch (choix) {
+            case 12:
+                lieu = jeu.aller();
+                break;
             case 11:
                 jeu.wc();
                 jeu.nextStep();
@@ -223,6 +281,8 @@ void choixAct(int lieu){
                 break;
         }
     }
+    memlieu = lieu;
+    memchoix = choix;
 }
 
 
@@ -299,7 +359,16 @@ int main(int argc, const char * argv[]) {
         jeu.noEnergy();
         jeu.nextStep();
         jeu.mourirDeCrotteDeNezCacaSida();
+        jeu.zerocharisme();
+        if (jeu.maladroitesse()){
+            int malchance = (rand()%100) < 80;
+            if (malchance){
+                float prcentmoney = rand() % 100;
+                jeu.perdreArgent(prcentmoney);
+            }
+        }
+
     }
-    
+    jeu.simuCrevard(memlieu,memchoix);
     return 0;
 }

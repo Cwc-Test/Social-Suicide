@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0CF80E22A3F29400665BE7 /* crevards.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CF80C22A3F29400665BE7 /* crevards.cpp */; };
 		1D0E87862276111900DD5449 /* need.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D0E87842276111900DD5449 /* need.cpp */; };
 		1D0E878922764BDE00DD5449 /* gameplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D0E878722764BDE00DD5449 /* gameplay.cpp */; };
 		1D862AE12275E6F6001CC17F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D862AE02275E6F6001CC17F /* main.cpp */; };
@@ -28,6 +29,8 @@
 /* Begin PBXFileReference section */
 		1D0CF7E9229741B300665BE7 /* idiotpass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = idiotpass.h; sourceTree = "<group>"; };
 		1D0CF80B22A1E85600665BE7 /* gloobar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gloobar.h; sourceTree = "<group>"; };
+		1D0CF80C22A3F29400665BE7 /* crevards.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = crevards.cpp; sourceTree = "<group>"; };
+		1D0CF80D22A3F29400665BE7 /* crevards.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = crevards.hpp; sourceTree = "<group>"; };
 		1D0E87842276111900DD5449 /* need.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = need.cpp; sourceTree = "<group>"; };
 		1D0E87852276111900DD5449 /* need.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = need.hpp; sourceTree = "<group>"; };
 		1D0E878722764BDE00DD5449 /* gameplay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameplay.cpp; sourceTree = "<group>"; };
@@ -85,6 +88,8 @@
 				1DC0AC77228EE59600EDDDC8 /* secured.h */,
 				1D0CF7E9229741B300665BE7 /* idiotpass.h */,
 				1D0CF80B22A1E85600665BE7 /* gloobar.h */,
+				1D0CF80C22A3F29400665BE7 /* crevards.cpp */,
+				1D0CF80D22A3F29400665BE7 /* crevards.hpp */,
 			);
 			path = "Social Suicide";
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 				1D862AE12275E6F6001CC17F /* main.cpp in Sources */,
 				1D0E87862276111900DD5449 /* need.cpp in Sources */,
 				1D0E878922764BDE00DD5449 /* gameplay.cpp in Sources */,
+				1D0CF80E22A3F29400665BE7 /* crevards.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +280,7 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -286,6 +293,7 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
