@@ -71,10 +71,7 @@ private:
     //Competences
     float charisme, force, intelligence, guitard;
     
-    void gagneExpCharisme();
-    void gagneExpForce();
-    void gagneExpIntell();
-    void gagneExpGuitard();
+
     
     int hourCurrent = 2;
     bool isDay = true;
@@ -95,6 +92,26 @@ private:
     
     
 public:
+    void degradhygneg();
+    void gagneExpCharisme();
+    void gagneExpForce();
+    void gagneExpIntell();
+    void gagneExpGuitard();
+    void setOnDiar(){DiarrheeAnusDilated=true;}
+    void afficheTimeBar(){
+        //hourcurrent
+        cout << endl << " Nuit" << "                  " << "Jour" << endl;
+        cout << " |            |           |" << endl<<"[";
+        for (int i=-13; i!=13; ++i){
+            if (i==hourCurrent){
+                cout << "#";
+            }
+            else{
+                cout << "-";
+            }
+        }
+        cout << "]" << endl;
+    }
     int gethourCurrent(){return hourCurrent;}
     void simuCrevard(int lieu, int choix){
         int prc = Trouduc.abordage(lieu, choix, money);

@@ -10,6 +10,7 @@
 		1D0CF80E22A3F29400665BE7 /* crevards.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CF80C22A3F29400665BE7 /* crevards.cpp */; };
 		1D0E87862276111900DD5449 /* need.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D0E87842276111900DD5449 /* need.cpp */; };
 		1D0E878922764BDE00DD5449 /* gameplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D0E878722764BDE00DD5449 /* gameplay.cpp */; };
+		1D118FDC22A9D28A0073CE64 /* flatmission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D118FDA22A9D28A0073CE64 /* flatmission.cpp */; };
 		1D862AE12275E6F6001CC17F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D862AE02275E6F6001CC17F /* main.cpp */; };
 		1DC0AC76228EE09A00EDDDC8 /* sha512.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DC0AC73228EE09A00EDDDC8 /* sha512.cpp */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,8 @@
 		1D0E87852276111900DD5449 /* need.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = need.hpp; sourceTree = "<group>"; };
 		1D0E878722764BDE00DD5449 /* gameplay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameplay.cpp; sourceTree = "<group>"; };
 		1D0E878822764BDE00DD5449 /* gameplay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameplay.hpp; sourceTree = "<group>"; };
+		1D118FDA22A9D28A0073CE64 /* flatmission.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = flatmission.cpp; sourceTree = "<group>"; };
+		1D118FDB22A9D28A0073CE64 /* flatmission.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = flatmission.hpp; sourceTree = "<group>"; };
 		1D16878C227B392100BEC5E4 /* text.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = text.h; sourceTree = "<group>"; };
 		1D680D3F227F4FD100A4CB2E /* goals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = goals.h; sourceTree = "<group>"; };
 		1D680D40227F503200A4CB2E /* goals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = goals.json; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				1D0CF80B22A1E85600665BE7 /* gloobar.h */,
 				1D0CF80C22A3F29400665BE7 /* crevards.cpp */,
 				1D0CF80D22A3F29400665BE7 /* crevards.hpp */,
+				1D118FDA22A9D28A0073CE64 /* flatmission.cpp */,
+				1D118FDB22A9D28A0073CE64 /* flatmission.hpp */,
 			);
 			path = "Social Suicide";
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 				1DC0AC76228EE09A00EDDDC8 /* sha512.cpp in Sources */,
 				1D862AE12275E6F6001CC17F /* main.cpp in Sources */,
 				1D0E87862276111900DD5449 /* need.cpp in Sources */,
+				1D118FDC22A9D28A0073CE64 /* flatmission.cpp in Sources */,
 				1D0E878922764BDE00DD5449 /* gameplay.cpp in Sources */,
 				1D0CF80E22A3F29400665BE7 /* crevards.cpp in Sources */,
 			);

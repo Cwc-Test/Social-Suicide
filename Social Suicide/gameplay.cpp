@@ -8,6 +8,10 @@
 
 #include "gameplay.hpp"
 
+void gameplay::degradhygneg(){
+    PTSLIVE.degradHyg(.9);
+}
+
 
 int gameplay::aller(){
     while (true){
@@ -15,15 +19,24 @@ int gameplay::aller(){
         cout << "Aller ou ? "<<"En ville(1) ?\nDans un bar(2) ?\n"<<endl;
         if (freeville){
             cout << "Foyer de sans-abris(3) ?" << endl;
-            cout << "Bibliothèque (4) ?"<<endl;
+            cout << "Hopital (4) ?"<<endl;
         }
         cin >> choix;
         switch (choix) {
-            case 3:
             case 4:
-            case 5:
-            case 6:
-            case 7:
+                if (getMoney()>=100.00){
+                    cout << "Vous allez a l'hopital. Vous etes soigner, vous payer les frais de 100 euros."<<endl;
+                    if (CrotteDeNezCacaSida){
+                        cout << "Vous avez le SIDA ! " << "il vous restait "<<countSida<<" tours a vivre!"<<endl;
+                        countSida+=80+(rand()%60);
+                        cout << "Il vous reste "<<countSida<<" tours a vivre!"<<endl;
+                    }
+                    DiarrheeAnusDilated = false;
+                    cout <<"Vous etes de retour en ville!"<<endl;
+                    nextStep();
+                    return 1;
+                }
+            case 3:
                 if (freeville){
                     return choix;
                 }
@@ -47,6 +60,9 @@ void gameplay::vomir(){
 
 void gameplay::youWon(){
     cout << "FELICITATION VOUS AVEZ FINIT LE JEU !!! " << endl << endl;
+    if (CrotteDeNezCacaSida){
+        cout << "Mais vous refilez le sida a Beth et elle vous quitte vous croyant infidel."<< endl;
+    }
     cout << " __ __ _____ _____ " << endl;
     cout << "|  |  |     |  |  |" << endl;
     cout << "|_   _|  |  |  |  |" << endl;
@@ -180,10 +196,12 @@ void gameplay::Sauvegarder(){//Sauvegarde du jeu(6h)
             mf << hourCurrent << endl << isDay << endl << bouclierAcouilles << endl;
             mf << CrotteDeNezCacaSida << endl << DiarrheeAnusDilated << endl;
             mf << countSida << endl << PointSave << endl << couteau << endl << BAC << endl;
+
             map<int, float> ND = PTSLIVE.getNeeds();
             for (auto i=ND.begin(); i!=ND.end(); ++i){
                 mf << i->second << endl;
             }
+            mf<<logiquestate<<endl << freeville<<endl;
             
             mf.close();
             
@@ -283,8 +301,13 @@ bool gameplay::Charger(){//Chargement du jeu(8h)
         SS << SIS[21];
         soc=stof(SIS[21]);
         SS.str("");
+        SS << SIS[22];
+        SS >> logiquestate;
+        SS.str("");
+        SS << SIS[23];
+        SS >> freeville;
         PTSLIVE.setNeed(app, hyg, vess, fun, sleep, soc);
-        
+
         /*
         SS1 << CV << endl << LM << endl << money << endl<< charisme << endl << force << endl << intelligence << endl << guitard << endl<< hourCurrent << endl << isDay << endl << bouclierAcouilles << endl<< CrotteDeNezCacaSida << endl << DiarrheeAnusDilated << endl<< countSida << endl << PointSave << endl << couteau << endl << BAC << endl;
         SS1 <<app<< hyg<< vess<< fun<< sleep<< soc;

@@ -12,9 +12,11 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include "gloobar.h"
+#include "flatmission.hpp"
 using namespace std;
 
 gameplay jeu(1);
+flatmission flater;
 //START VAR
 int lieux = 1;
 bool candidated = true;
@@ -100,6 +102,7 @@ void choixAct(int lieu){
         cout << "4 - Aller autre part..." <<endl;
         
         cin >> choix;
+        system("clear");
         cout << endl << endl;
         switch (choix) {
             case 4:
@@ -202,6 +205,7 @@ void choixAct(int lieu){
         cout << "12 - Allez autre part..."<< endl;
         
         cin >> choix;
+        system("clear");
         cout << endl << endl;
         bool res;
         counttour+=1;
@@ -323,6 +327,9 @@ void choixAct(int lieu){
 
 
 int main(int argc, const char * argv[]) {
+    bool flt;
+    int cx;
+    int ident;
     cout << "Charger la sauvegarde ? (O)ui/(N)on" << endl;
     string chrg;
     cin >> chrg;
@@ -385,6 +392,7 @@ int main(int argc, const char * argv[]) {
             cout << "Il fait nuit." << endl;
         }
         jeu.afficheTout();
+        jeu.afficheTimeBar();
         jeu.timepassndegrad();
         choixAct(lieux);
         if (jeu.gameisover()){
@@ -405,7 +413,100 @@ int main(int argc, const char * argv[]) {
                 jeu.perdreArgent(prcentmoney);
             }
         }
-
+        if ((rand()%100)<5){
+            flt = flater.initPlay();
+            ident = flater.getId();
+            if (flater.cx==1){
+                switch (ident){
+                    case 0:
+                        //vol vielle dame
+                        if (flt){
+                            //cout << "Vous avez vaincu !"<<endl;
+                            jeu.gagneExpForce();
+                        }
+                        else{
+                            //cout << "Vous etes tellement mou que vous vous etes blesser tout seul."<<endl;
+                            jeu.nextStep();
+                        }
+                        break;
+                    case 1:
+                        jeu.degradhygneg();
+                        //combat imprevu
+                        if (flt){
+                            //cout << "Vous avez combatut et gagner !"<<endl;
+                            jeu.gagneExpForce();
+                            jeu.gagneExpIntell();
+                        }
+                        else{
+                            //cout << "Vous etes tellement mou que vous vous etes blesser tout seul."<<endl;
+                            
+                        }
+                        break;
+                    case 2:
+                        //trouver par terre
+                        //cout << "Vous avez recuperer le fric du porte-feuilles !"<<endl;
+                        jeu.gagnemoney(rand()%200);
+                        break;
+                    case 3:
+                        //drogue trouvee
+                        //cout << "Rien ne se passe."<<endl;
+                        break;
+                    case 4:
+                        //pluie
+                        //cout << "Heureusement que vous êtes a l'abris, ce serait dommage de tomber malade."<<endl;
+                        break;
+                }
+            }
+            if (flater.cx==2){
+                switch (ident){
+                    case 0:
+                        //vol vielle dame
+                        if (flt){
+                            //cout << "Vous avez fuit !"<<endl;
+                            jeu.nextStep();
+                        }
+                        else{
+                            //cout << "Vous etes tomber en essayant de fuir."<<endl;
+                        }
+                    case 1:
+                        jeu.degradhygneg();
+                        //combat imprevu
+                        //cout << "Vous n'avez plus d'argent et vous etes en PLS au sol !"<<endl;
+                        for (int i =0; i<2;i++){
+                            jeu.nextStep();
+                        }
+                        break;
+                    case 2:
+                        //trouver par terre
+                        //cout << "Vous avez rendu le porte-feuille et la personne a dit: <<Merci, c'est cool.>>" << endl;
+                        
+                        break;
+                    case 3:
+                        //drogue trouvee
+                        if (flt){
+                            //cout << "Vous avez rendu a un individu louche son bien !"<<endl;
+                            
+                        }
+                        else{
+                            //cout << "Vous etes tellement nerveux qu'il vous menace et vous poursuit, heureusement vous vous cachez dans une poubelle au coins d'une rue et au bout de plusiseurs minutes vous retourner apeurer en ville."<<endl;
+                            lieux = 1;
+                            jeu.zerocharisme();
+                        }
+                        break;
+                    case 4:
+                        //pluie
+                        if (flt){
+                            //cout << "Il ne pleut plus au bout de 3 minutes!"<<endl;
+                            break;
+                        }
+                        else{
+                            //cout << "Vous etes tremper et vous etes pas en forme car il fait froid d'un coup."<<endl;
+                            jeu.setOnDiar();
+                        }
+                        break;
+                }
+            }
+        }
     }
     
     return 0;
