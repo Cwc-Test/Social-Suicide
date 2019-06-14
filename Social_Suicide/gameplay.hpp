@@ -46,6 +46,7 @@ Integrer un mode jour/nuit
 
 #ifndef gameplay_hpp
 #define gameplay_hpp
+#include <time.h>
 #include <map>
 #include <fstream>
 #include <sstream>

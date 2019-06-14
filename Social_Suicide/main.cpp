@@ -10,7 +10,7 @@
 #include <map>
 #include "gameplay.hpp"
 #include <stdio.h>
-#include <sys/ioctl.h>
+//#include <sys/ioctl.h>
 #include "gloobar.h"
 #include "flatmission.hpp"
 using namespace std;
@@ -102,7 +102,7 @@ void choixAct(int lieu){
         cout << "4 - Aller autre part..." <<endl;
         
         cin >> choix;
-        system("clear");
+        //system("clear");
         cout << endl << endl;
         switch (choix) {
             case 4:
@@ -205,7 +205,7 @@ void choixAct(int lieu){
         cout << "12 - Allez autre part..."<< endl;
         
         cin >> choix;
-        system("clear");
+        //system("clear");
         cout << endl << endl;
         bool res;
         counttour+=1;
@@ -324,21 +324,54 @@ void choixAct(int lieu){
     memlieu = lieu;
     memchoix = choix;
 }
-
+#define _UNICODE
+#include <windows.h>
+/*
+void SetLucidaFont()
+{
+    HANDLE StdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_FONT_INFOEX info;
+    memset(&info, 0, sizeof(CONSOLE_FONT_INFOEX));
+    info.cbSize = sizeof(CONSOLE_FONT_INFOEX);              // prevents err=87 below
+    if (GetCurrentConsoleFontEx(StdOut, FALSE, &info))
+    {
+        info.FontFamily   = FF_DONTCARE;
+        info.dwFontSize.X = 0;  // leave X as zero
+        info.dwFontSize.Y = 14;
+        info.FontWeight   = 400;
+        _tcscpy_s(info.FaceName, L"Lucida Console");
+        if (SetCurrentConsoleFontEx(StdOut, FALSE, &info))
+        {
+        }
+    }
+}
+*/
 
 int main(int argc, const char * argv[]) {
+//	SetLucidaFont();
+//	SetConsoleOutputCP(CP_UTF8);
+
+//cout << GetConsoleCP() << "   " << GetConsoleOutputCP() << endl;
+
+//SetConsoleOutputCP(CP_UTF8);
+//SetConsoleCP(CP_UTF8);
+
+
+	//cout << GetConsoleCP() << "   " << GetConsoleOutputCP() << endl;
+	
     bool flt;
     int cx;
     int ident;
-    cout << "Charger la sauvegarde ? (O)ui/(N)on" << endl;
+   // cout << "Chargerééla sauvegarde ? (O)ui/(N)on" << endl;
+   /*
     string chrg;
-    cin >> chrg;
+   cin >> chrg;
     bool crx = false;
     if (chrg=="O"){
         crx = jeu.Charger();
     }
-    
-    
+    */
+    /*	
     cout << "Veuillez mettre le terminal en plein écran." << endl;
     while (true){
         //Structure dans laquelle sera mit les informations du terminal
@@ -350,9 +383,9 @@ int main(int argc, const char * argv[]) {
                 break;
             }
         }
-    }
+    }*/
     //efface
-    system("clear");
+ //  system("clear");
     
     /*
      besoins[1] = need_app;
@@ -397,7 +430,7 @@ int main(int argc, const char * argv[]) {
         choixAct(lieux);
         if (jeu.gameisover()){
             jeu.AffGameOver();
-            return 0;
+            break;
         }
         jeu.poopishere();
         jeu.simuCrevard(memlieu,memchoix);
@@ -508,6 +541,9 @@ int main(int argc, const char * argv[]) {
             }
         }
     }
-    
+	
+	cout << "Fin";
+    string fin;
+	cin >> fin;
     return 0;
 }
